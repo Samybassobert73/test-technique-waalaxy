@@ -19,6 +19,7 @@
     "vite-plugin-checker": "^0.6.4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@nx/esbuild": "18.2.1",
     "@nx/eslint": "18.2.1",
     "@nx/eslint-plugin": "18.2.1",
