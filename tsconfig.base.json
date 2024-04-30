@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": false,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -15,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {},
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "resolveJsonModule": true
   },
   "exclude": ["node_modules", "tmp"]
