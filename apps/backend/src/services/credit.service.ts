@@ -19,4 +19,23 @@ export default class CreditService extends BaseService{
         return randomNumber
     }
 
+    decrementCredit = async (credit:CreditSI): Promise<CreditSI> => {
+        credit.value -= 1
+        await credit.save();
+        return credit
+    }
+
+    hasCredit = async (credit:CreditSI): Promise<boolean> => {
+        if (credit.value > 0){
+            return true
+        }
+        return false
+    }
+
+    refreshCredit = async (credit:CreditSI, value:number): Promise<CreditSI> => {
+        credit.value = value
+        await credit.save();
+        return credit
+    };
+
 }
