@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './globals.css';
+import Index from "./pages/home/index";
 const root = ReactDOM.createRoot(
   document.getElementById('root') ?? document.body
 );
@@ -8,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <div className='text-red-500'>hello world!</div> 
+     <Index/>
   </StrictMode>
 );
