@@ -1,6 +1,5 @@
 import express from "express";
-import indexRouter from "./routes/index.route";
-
+import indexRouter from "../routes/index.route";
 
 const app = express();
 const cors = require('cors');
@@ -18,4 +17,4 @@ app.use(function (req, res, next) {
   res.status(404).send(" route not found");
 });
 
-export default app
+export default app;

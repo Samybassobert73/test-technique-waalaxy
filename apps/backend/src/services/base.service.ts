@@ -1,4 +1,4 @@
-import mongoose from "../database";
+import mongoose from "../database/database";
 import BaseRepository from "../repository/base.repository";
 
 
@@ -10,23 +10,22 @@ export default class BaseService{
     }
 
     post = async (data) => {
-        const resource = await this.repository.create(data)
-        return resource
+        return await this.repository.create(data)
+         
     }
 
     get = async (filters = {}): Promise<any[]> =>{
-        const resource = await this.repository.find(filters) as []
-        return resource
+        return await this.repository.find(filters) as []
     }
 
     getOne = async (filters = {}): Promise<any> =>{
-        const resource = await this.repository.findOne(filters)
-        return resource
+        return await this.repository.findOne(filters)
+        
     }
 
     getById = async (id: string): Promise<any> => {
-        const resource = await this.repository.findById(id) 
-        return resource
+        return await this.repository.findById(id) 
+         
     }
 
     delete = async (id: string): Promise<any> => {

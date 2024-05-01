@@ -1,6 +1,6 @@
 import { Schema, Model, model } from "mongoose";
 import { injectable, singleton } from "tsyringe";
-import mongoose from "../database";
+import mongoose from "../database/database";
 import ModelI from "../interfaces/model.interface";
 import CreditSI from "../interfaces/credit.interface";
 

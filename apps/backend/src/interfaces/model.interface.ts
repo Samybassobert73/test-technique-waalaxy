@@ -1,4 +1,4 @@
-import mongoose from "../database";
+import mongoose from "../database/database";
 
 export default interface ModelI{
     schema: mongoose.Schema<any>
