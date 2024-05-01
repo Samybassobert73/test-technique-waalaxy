@@ -10,4 +10,8 @@ export default class CreditRepository extends BaseRepository<CreditSI>{
         super(modelI)
     }
 
+    find = async () => {
+        return await this.model.find().populate('type', 'name')
+    }
+
 }

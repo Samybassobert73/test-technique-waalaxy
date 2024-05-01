@@ -17,4 +17,13 @@ export const getTypes = async () => {
         'Content-Type': 'application/json',
       },
     }).then((response) => response.json());
-  }
+}
+
+export const getCredit = async () => {
+    return fetch(`${url}credit/`, {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    }).then((response) => response.json());
+}
