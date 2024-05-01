@@ -1,4 +1,3 @@
-import "reflect-metadata"
 import express from "express";
 import indexRouter from "./routes/index.route";
 

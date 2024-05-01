@@ -5,4 +5,4 @@ export interface CreditI{
     value: number
 }
 
-export default interface ActionSI extends CreditI, mongoose.Document{}
+export default interface CreditSI extends CreditI, mongoose.Document{}

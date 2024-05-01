@@ -19,13 +19,18 @@ export default class BaseService{
         return resource
     }
 
-    getById = async (id: string): Promise<any> => {
-        const resource = await this.repository.findOne(id) 
+    getOne = async (filters = {}): Promise<any> =>{
+        const resource = await this.repository.findOne(filters)
         return resource
     }
 
-    delete = (id: string): void => {
-        return this.repository.deleteOne(id)
+    getById = async (id: string): Promise<any> => {
+        const resource = await this.repository.findById(id) 
+        return resource
+    }
+
+    delete = async (id: string): Promise<any> => {
+        return await this.repository.findByIdAndDelete(id)
     }
 
 }

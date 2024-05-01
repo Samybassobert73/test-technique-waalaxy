@@ -11,20 +11,25 @@ export default class BaseRepository<T>{
     create = async (data: T) => {
         const resource = await this.model.create(data)
         return resource
-    }
+    }    
 
     find = async (filters = {}): Promise<T[]> =>{
         const resource = await this.model.find(filters) as T[]
         return resource
     }
 
-    findOne = async (id: string): Promise<T> => {
-        const resource = await this.model.findOne({_id: new mongoose.Types.ObjectId(id)}) as T
+    findOne = async (filters = {}): Promise<T> => {
+        const resource = await this.model.findOne(filters) as T
         return resource
     }
 
-    deleteOne = (id: string): void => {
-        return this.model.deleteOne({_id: new mongoose.Types.ObjectId(id)})
+    findById = async (id: string): Promise<T> => {
+        const resource = await this.model.findById({_id: new mongoose.Types.ObjectId(id)}) as T
+        return resource
+    }
+
+    findByIdAndDelete = async (id: string): Promise<T> => {
+        return await this.model.findByIdAndDelete({_id: new mongoose.Types.ObjectId(id)})
     }
 
 }

@@ -7,9 +7,7 @@ import BaseController from "./base.controller";
 @injectable()
 export default class typeController extends BaseController{
 
-    service: TypeService
     constructor(@inject(TypeService)service: TypeService){
         super(service);
-        this.service = service
     }
 }
