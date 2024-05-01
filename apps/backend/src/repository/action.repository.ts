@@ -14,4 +14,9 @@ export default class ActionRepository extends BaseRepository<ActionSI>{
         return await this.model.find().populate('type', 'name')
     }
 
+    create = async (data: ActionSI) => {
+        const resource = await this.model.create(data)
+        return resource.populate('type', 'name')
+    } 
+
 }

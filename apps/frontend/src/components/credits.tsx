@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getCredit } from '../client/api'
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion";
 import { getColorClass } from "../utils/utils";
+import CreditI from "@/interfaces/credit.interface";
 
 
 const Credit = () => {
-  const [credits, setCredits] = useState<any[]>(null);
+  const [credits, setCredits] = useState<CreditI[]|null>(null);
 
   useEffect(() => {
-    getCredit().then((data:any) => {
+    getCredit().then((data:CreditI[]) => {
       setCredits(data);
     });
   }, []);

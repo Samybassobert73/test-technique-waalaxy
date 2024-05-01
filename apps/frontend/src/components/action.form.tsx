@@ -22,6 +22,8 @@ import {
   } from "@/components/ui/select"
 import { postAction, getTypes } from '../client/api'
 import { IoIosRocket } from "react-icons/io";
+import { useAction } from '../context/action.context'
+import TypeI from '@/interfaces/type.interface'
 
 const formSchema = z.object({
     type: z.string().nonempty({
@@ -30,11 +32,11 @@ const formSchema = z.object({
 })
    
 const Actionform = () => {
-    const [types, setTypes] = React.useState<any[]>([])
+    const {addAction } = useAction()
+    const [types, setTypes] = React.useState<TypeI[]>([])
 
     useEffect(() => {
-        getTypes().then((data) => {
-            console.log(data)
+        getTypes().then((data:TypeI[]) => {
           setTypes(data);
         });
     }, []);
@@ -47,7 +49,7 @@ const Actionform = () => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const { type } = values
         postAction(type).then((data) => {
-            console.log(data)
+            addAction(data);
         });
     }
 
@@ -69,7 +71,7 @@ const Actionform = () => {
                         <SelectContent>
                             <SelectGroup>
                             <SelectLabel>...</SelectLabel>
-                            {types.map((type) => (
+                            {types.map((type:TypeI) => (
                                 <SelectItem key={type._id} value={type._id}>
                                 {type.name}
                                 </SelectItem>
