@@ -1,31 +1,31 @@
 import mongoose from "../database";
-import ModelI from "../interfaces/model.interface";
+import BaseRepository from "../repository/base.repository";
 
 
-export default class BaseService<T>{
+export default class BaseService{
 
-    model: mongoose.Model<any, any> | undefined
-    constructor(modelI?: ModelI){
-        this.model = modelI.model
+    repository: BaseRepository<any>
+    constructor(repository: BaseRepository<any>){
+        this.repository = repository
     }
 
-    post = async (data: T) => {
-        const resource = await this.model.create(data)
+    post = async (data) => {
+        const resource = await this.repository.create(data)
         return resource
     }
 
-    get = async (filters = {}): Promise<T[]> =>{
-        const resource = await this.model.find(filters) as T[]
+    get = async (filters = {}): Promise<[]> =>{
+        const resource = await this.repository.find(filters) as []
         return resource
     }
 
-    getById = async (id: string): Promise<T> => {
-        const resource = await this.model.findOne({_id: new mongoose.Types.ObjectId(id)}) as T
+    getById = async (id: string): Promise<any> => {
+        const resource = await this.repository.findOne(id) 
         return resource
     }
 
     delete = (id: string): void => {
-        return this.model.deleteOne({_id: new mongoose.Types.ObjectId(id)})
+        return this.repository.deleteOne(id)
     }
 
 }
