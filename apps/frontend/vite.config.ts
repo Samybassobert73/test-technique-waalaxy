@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import { scripts } from './package.json';
+import path from "path"
 
 export default defineConfig({
   root: __dirname,
@@ -24,6 +25,12 @@ export default defineConfig({
     nxViteTsPaths(),
     checker({ typescript: true, eslint: { lintCommand: scripts.lint } }),
   ],
+
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 
   build: {
     outDir: '../../dist/apps/frontend',
