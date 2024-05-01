@@ -10,4 +10,8 @@ export default class ActionRepository extends BaseRepository<ActionSI>{
         super(modelI)
     }
 
+    find = async () => {
+        return await this.model.find().populate('type', 'name')
+    }
+
 }

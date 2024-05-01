@@ -1,5 +1,6 @@
 import Actionform from '@/components/action.form'
 import Credit from '@/components/credits'
+import Queue from '@/components/queue'
 import React from 'react'
 const Index = () => {
   return (
@@ -9,6 +10,7 @@ const Index = () => {
         <Credit/>
         <hr className="h-0.3 bg-gray-400 rounded-lg my-4" />
         <Actionform/>
+        <Queue/>
         </div>
       </div>
     </div>

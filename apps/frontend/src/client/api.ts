@@ -10,6 +10,15 @@ export const postAction = async (type:string) => {
         }).then((response) => response.json());
 }
 
+export const getActions = async () => {
+    return fetch(`${url}action/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => response.json());
+  }
+
 export const getTypes = async () => {
     return fetch(`${url}type/`, {
       method: 'GET',
