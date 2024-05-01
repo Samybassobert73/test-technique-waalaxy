@@ -1,11 +1,13 @@
 import app from "./app";
 import * as db from "./database";
-import { createFixtures } from "./fixtures/type.fixture";
+import * as typeFixtures from "./fixtures/type.fixture";
+import * as creditFixtures from "./fixtures/credit.fixture";
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 db.connect().then(() => {
-    createFixtures(4)
+    typeFixtures.createFixtures(4)
+    creditFixtures.createFixtures()
     app.listen(port, async () => {
       console.log(`Server is running http://${host}:${port}`);
     });
