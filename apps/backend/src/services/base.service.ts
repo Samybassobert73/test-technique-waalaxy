@@ -14,7 +14,7 @@ export default class BaseService{
         return resource
     }
 
-    get = async (filters = {}): Promise<[]> =>{
+    get = async (filters = {}): Promise<any[]> =>{
         const resource = await this.repository.find(filters) as []
         return resource
     }

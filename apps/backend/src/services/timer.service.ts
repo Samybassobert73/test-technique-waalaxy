@@ -3,7 +3,6 @@ import CreditService from '../services/credit.service';
 import ActionService from '../services/action.service';
 import ActionSI from '../interfaces/action.interface';
 import CreditSI from '../interfaces/credit.interface';
-import Mongoose  from 'mongoose';
 @injectable()
 export default class TimerService {
 	constructor(
@@ -17,7 +16,7 @@ export default class TimerService {
         if (!action){
             return null;
 		}
-        const removedAction = await this.removeAction(action._id)
+        const removedAction = await this.actionService.delete(action._id) 
         const credit = await this.creditService.getOne({type: removedAction.type})
         const updatedcredit = await this.decrementCredit(credit._id)	
         return {removedAction, updatedcredit}
@@ -56,7 +55,23 @@ export default class TimerService {
         return credit
     }
 
-    removeAction = async (id:string): Promise<ActionSI> => {
-        return await this.actionService.delete(id)
+    refreshCredits = async ():Promise<CreditSI[]> => {
+        const updatedCredits = []
+        const credits = await this.creditService.get()
+        for(const credit of credits){
+            const value = this.creditService.generateCreditValue()
+            const updatedCredit = await this.refreshCredit(credit._id, value) 
+            updatedCredits.push(updatedCredit);
+        }
+        return updatedCredits
     }
+    
+    refreshCredit = async (id:string, value:number): Promise<CreditSI> => {
+        const credit = await this.creditService.getById(id)
+        credit.value = value
+        await credit.save();
+        return credit
+    };
+
+
 } 

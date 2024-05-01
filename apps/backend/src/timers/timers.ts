@@ -8,11 +8,12 @@ export default class Timers {
         @inject(TimerService)private timerService:TimerService,
 	){}
 
-	public init = () => {
+	init = () => {
 		this.executeNextActionTimer();
+        this.refreshCredit()
 	};
 
-	private executeNextActionTimer = () => {
+	executeNextActionTimer = () => {
 		const executeActionTimer = new CronJob(
 			"*/15 * * * * *", // 15s
 			async () => {
@@ -27,4 +28,19 @@ export default class Timers {
 			'Europe/Paris'
 		);
 	}
+
+    refreshCredit = () => {
+		const refreshCreditTimer = new CronJob(
+			"*/15 * * * * *", // 15s
+			async () => {
+                const result = await this.timerService.refreshCredits()
+                console.log('result',result);
+			}, 
+			null, 
+			true,
+			'Europe/Paris'
+		);
+	}
+
+
 } 
