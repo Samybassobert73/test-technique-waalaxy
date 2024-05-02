@@ -1,13 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getCredit } from '../client/api'
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion";
 import { getColorClass } from "../utils/utils";
 import CreditI from "@/interfaces/credit.interface";
-
+import { io, Socket }  from "socket.io-client";
+import { DefaultEventsMap} from "@socket.io/component-emitter";
 
 const Credit = () => {
   const [credits, setCredits] = useState<CreditI[]|null>(null);
+  const socket = useRef<Socket<DefaultEventsMap, DefaultEventsMap>| undefined>(undefined); 
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:3000");
+
+    socket.current.on('decrement-credit', (data: string): void => {
+       const { _id, value } = JSON.parse(data);
+       updateCredits(_id, value);
+    });
+
+    socket.current.on('refresh-credit', (data: string): void => {
+      setCredits(JSON.parse(data));
+   });
+    return () => {
+      socket.current?.disconnect();
+    };
+  }, []);
+
+
+  const updateCredits = (id: string, newValue:number): void => {
+    setCredits((prev) => {
+      return prev.map((credit) => {
+        if (credit._id === id) {
+          return { ...credit, value: newValue };
+        }
+        return credit;
+      });
+    });
+  }
 
   useEffect(() => {
     getCredit().then((data:CreditI[]) => {
