@@ -1,10 +1,8 @@
 import * as mongoose from "mongoose";
-
-const uri  = `mongodb://127.0.0.1:27017/db`
   
 export const connect = async (): Promise<void> => {
   return mongoose
-  .connect(uri)
+  .connect(process.env.DB_URL)
   .then(async () => {
     console.log("Connected to MongoDB");
   })

@@ -1,6 +1,8 @@
+const MAX_VALUE = 10
+
 const generateCreditValue = () => {
-  const minRange = 10 * 0.8;
-  const maxRange = 10;
+  const minRange = MAX_VALUE * 0.8;
+  const maxRange = MAX_VALUE;
   let randomNumber = Math.random() * (maxRange - minRange) + minRange;
   randomNumber = Math.round(randomNumber);
   return randomNumber
