@@ -12,7 +12,7 @@ export default class RefreshCreditTimers {
 	){}
 
 	init = () => {
-		setInterval(() => { this.execute()}, 2 * 60 * 1000);// }, 10 * 60 * 1000); //10min
+		setInterval(() => { this.execute()},10 * 60 * 1000); //10min
 	}
 
     execute = async (): Promise<void> => {
