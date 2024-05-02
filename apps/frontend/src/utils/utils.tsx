@@ -1,9 +1,9 @@
 export const getColorClass = (value: number): string => {
     if (value === 0) {
-        return 'bg-red-200';
+        return 'text-white bg-[#E84855]';
     } else if (value < 2) {
-        return 'bg-yellow-200';
+        return 'text-white bg-[#FAA916]';
     } else {
-        return 'bg-green-200';
+        return 'text-white bg-[#1B998B]';
     } 
 };
