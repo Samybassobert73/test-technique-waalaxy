@@ -13,6 +13,7 @@ Welcome to the intergalactic universe of our technical test, where stars twinkle
 - [React](https://reactjs.org/)
 - [Express](https://expressjs.com/fr/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Mongodb](https://www.mongodb.com/fr-fr)
     
 
 ## 🐳 Deploy Containers    
@@ -36,7 +37,7 @@ npm i
 
 ```bash
 cd  /test-boilerplate/apps/backend
-node ./src/index.ts 
+node ./src/fixtures.ts 
 ```
 
 ## ⚙️  Start backend    
@@ -58,22 +59,50 @@ npx nx serve frontend
 
 ## 💁Modify parameters for test
 
+### Change max value
 
-- Change Max value in Credit Service
+
+- Change MAX_VALUE in Credit Service 
+
+```bash
+cd test-boilerplate/apps/backend/src/services/credit.service.ts
+```
+
 ```ts
 @injectable()
 export default class CreditService extends BaseService{
     MAX_VALUE:number
     constructor(@inject(CreditRepository)repository: CreditRepository){
         super(repository)
-        this.MAX_VALUE = 10;
+        this.MAX_VALUE = 10;//change here !!!
     }
 
 ```
+and change MAX_VALUE in credit fixtures
 
-- Add more action Types
+```bash
+cd test-boilerplate/apps/backend/src/fixtures/credit.ts
+```
 
-modify /test-boilerplate/apps/backend/src/fixtures/types.ts
+```ts
+const MAX_VALUE = 10
+
+```
+then reload fixtures
+
+```bash
+cd  /test-boilerplate/apps/backend
+node ./src/fixtures.ts 
+```
+
+### Add more credit types
+
+modify credits fixtures
+
+```bash
+cd test-boilerplate/apps/backend/src/fixtures/credit.ts
+```
+
 ```ts
 module.exports = [
   {
@@ -95,6 +124,7 @@ module.exports = [
     updatedAt: new Date(),
     __v: 0
   },
+  //add new credits here !!!
   {
     name: "D",
     createdAt: new Date() ,
@@ -105,14 +135,22 @@ module.exports = [
 
 ```
 
-run again the fixtures
+then reload fixtures
+
 ```bash
 cd  /test-boilerplate/apps/backend
-node ./src/index.ts 
+node ./src/fixtures.ts 
 ```
 
+### Change timers delay
 
-- Change timers delay
+
+```bash
+cd test-boilerplate/apps/backend/src/timers/
+```
+
+file: execute-action.timer.ts
+
 ```ts
 export default class ExecuteActionTimer {
 
@@ -129,6 +167,8 @@ export default class ExecuteActionTimer {
 	}
 ```
 
+file: refresh-credit.timer.ts
+
 ```ts
 export default class RefreshCreditTimers {
 
@@ -142,18 +182,31 @@ export default class RefreshCreditTimers {
 		setInterval(() => { this.execute()},10 * 60 * 1000); //10min change here !!!
 	}
 ```
-        
 
+## ✏️ System design
 
-        
-        
-        
+### Why MongoDB: 
 
+- Performance: MongoDB is designed for high performance, making it suitable for fast operations such as frequent data additions and deletions.
 
+- Flexible data modeling: The flexible structure of NoSQL databases enables data modeling that can easily adapt to changing application needs.
 
+- Scalability: MongoDB is designed to be scalable, which means it can handle a large number of transactions per second and can be scaled horizontally to meet growing demand.
 
+- Ease of development: MongoDB is often praised for its simplicity of use and ease of development.
 
+- Active community and rich documentation: MongoDB benefits from an active community and comprehensive documentation, making it easy to solve problems and learn how to use it. 
 
+### Scaling the infrastructure : 
+
+- Kafka:
+Using Kafka as a distributed messaging system in a microservices environment will improve fault tolerance and the ability to handle large data flows. This makes it possible to build robust, scalable architectures capable of responding to increasing user growth.
+
+- Kubernetes:
+Using kubernetes allows you to orchestrate the deployment, scaling and updating of containerized applications without the need for manual intervention. Coupled with a load balancer, it guarantees high availability of deployed applications and ensures automated resource management.
+
+- Redis:
+Using Redis improves application performance, scalability and reliability. Whether for data caching, user session management, queuing or temporary data storage.
 
 
 ## 🙇 Author
