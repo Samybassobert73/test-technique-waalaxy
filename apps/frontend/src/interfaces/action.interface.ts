@@ -1,8 +1,8 @@
-import  TypePI  from './typep.interface';
+import  CreditPI  from './creditp.interface';
 
 export default interface ActionI{
     _id: string
-    type: TypePI
+    credit: CreditPI
     createdAt: Date
     updatedAt: Date
     __v: number

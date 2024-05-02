@@ -6,17 +6,16 @@ import CreditSI from "../interfaces/credit.interface";
 
 @singleton()
 @injectable()
-export default class ActionModel implements ModelI{
+export default class CreditModel implements ModelI{
     schema: Schema<any> = new mongoose.Schema({
         type: {
-            type: Schema.Types.ObjectId,
-            ref: "types"
+            type: String,
+            required: true
         },
         value: {
             type: Number,
             required: true
         }
-
     }, {
         timestamps: true
     })

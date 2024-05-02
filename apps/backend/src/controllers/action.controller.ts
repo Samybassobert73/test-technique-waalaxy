@@ -13,10 +13,10 @@ export default class ActionController extends BaseController{
     }
 
     post = async(req, res) => {
-        const { type } = req.body;
+        const { credit } = req.body;
 
         const actionDto = new ActionDTO();
-        actionDto.type = type;
+        actionDto.credit = credit;
 
         const errors = await validate(actionDto);
         if (errors.length > 0) {

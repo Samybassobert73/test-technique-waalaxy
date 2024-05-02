@@ -1,8 +1,6 @@
-import TypePI from "./typep.interface"
-
 export default interface CreditI{
     _id: string
-    type: TypePI
+    type: string
     value: number
     createdAt: Date
     updatedAt: Date

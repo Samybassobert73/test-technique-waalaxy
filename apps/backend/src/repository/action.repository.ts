@@ -11,12 +11,12 @@ export default class ActionRepository extends BaseRepository<ActionSI>{
     }
 
     find = async () => {
-        return await this.model.find().populate('type', 'name')
+        return await this.model.find().populate('credit', 'type')
     }
 
     create = async (data: ActionSI) => {
         const resource = await this.model.create(data)
-        return resource.populate('type', 'name')
+        return resource.populate('credit', 'type')
     } 
 
 }

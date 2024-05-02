@@ -2,7 +2,6 @@ import CreditSI from "../interfaces/credit.interface";
 import BaseService from "./base.service"
 import { inject, injectable } from "tsyringe";
 import CreditRepository from "../repository/credit.repository";
-import TypeSI from "../interfaces/type.interface";
 
 @injectable()
 export default class CreditService extends BaseService{
@@ -48,28 +47,5 @@ export default class CreditService extends BaseService{
         }
         return updatedCredits
     }
-
-    generateCredits = async (types: TypeSI[]) => {
-        const credits = []
-        for(const type of types){
-        
-            const doublons = await this.getOne({type: type._id})
-            
-            if(!doublons){
-                const value = this.generateCreditValue()
-                const credit = this.generateCredit(type, value)
-                credits.push(credit)
-            }
-        }
-        return credits
-    }
-
-    generateCredit = (type, value:number) => {
-        const credit = {
-            type: type._id,
-            value: value
-        }
-        return credit
-    };
 
 }

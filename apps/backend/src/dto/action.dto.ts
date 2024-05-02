@@ -5,5 +5,5 @@ export default class ActionDTO {
     @IsString()
     @IsNotEmpty()
     @Transform(value => value.toString())
-    type: string;
+    credit: string;
 }
