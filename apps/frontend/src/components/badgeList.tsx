@@ -17,7 +17,7 @@ const BadgeList = () => {
   }, []);
 
   useEffect(() => {
-    socket.current = io("ws://localhost:3000");
+    socket.current = io(`ws://${import.meta.env.VITE_API_URL}`);
 
     socket.current.on('decrement-credit', (data: string): void => {
        const { _id, value } = JSON.parse(data);

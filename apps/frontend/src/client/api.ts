@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000/apiv1/';
+const url = `http://${import.meta.env.VITE_API_URL}/apiv1/`;
 
 export const postAction = async (credit:string) => {
     return fetch(`${url}action/`, {
