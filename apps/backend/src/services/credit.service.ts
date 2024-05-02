@@ -38,4 +38,14 @@ export default class CreditService extends BaseService{
         return credit
     };
 
+    refreshCredits = async (credits:CreditSI[]):Promise<CreditSI[]> => {
+        const updatedCredits = []
+        for(const credit of credits){
+            const value = this.generateCreditValue()
+            const updatedCredit = await this.refreshCredit(credit, value) 
+            updatedCredits.push(updatedCredit);
+        }
+        return updatedCredits
+    }
+
 }

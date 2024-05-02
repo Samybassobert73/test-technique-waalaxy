@@ -1,30 +1,44 @@
 import { inject, injectable } from 'tsyringe';
-import TimerService from '../services/timer.service';
 import CreditService from '../services/credit.service';
 import ActionService from '../services/action.service';
 import { io } from '../websocket/websocket';
+import ActionSI from '../interfaces/action.interface';
 @injectable()
-export default class Timers {
+export default class ExecuteActionTimer {
 
 	DECREMENT_CREDIT_MESSAGE:string = 'decrement-credit';
 	REMOVE_ACTION_MESSAGE:string = 'remove-action';
-	REFRESH_CREDIT_MESSAGE:string = 'refresh-credit';
 
 	constructor(
-        @inject(TimerService)private timerService:TimerService,
 		@inject(CreditService)private creditService:CreditService,
-        @inject(ActionService)private actionService:ActionService,
-		
+        @inject(ActionService)private actionService:ActionService,	
 	){}
 
 	init = () => {
-		setInterval(() => { this.executeNextActionTimer()}, 15 * 1000);//15s
-		setInterval(() => { this.refreshCreditTimer()}, 60 * 1000);// }, 10 * 60 * 1000); //10min
+		setInterval(() => { this.execute()}, 15 * 1000);//15s
 	}
+    
+    getNextAction = async (memo = []): Promise<ActionSI|null> => {
+        const nextAction = await this.actionService.getOne({ type: { $nin: memo }});
 
-	executeNextActionTimer = async ():Promise<void> => {
+        if (!nextAction){
+			return null
+		}
 
-		let action = await this.timerService.getNextAction()
+        const credit = await this.creditService.getOne({type: nextAction.type})
+        const hasCredit = await this.creditService.hasCredit(credit)
+
+        if (hasCredit){
+            return nextAction
+        }
+
+        memo.push(nextAction.type)
+
+        return this.getNextAction(memo)
+    }
+
+	execute = async ():Promise<void> => {
+		let action = await this.getNextAction()
        
         if (action){
             const removedAction = await this.actionService.delete(action._id) 
@@ -37,9 +51,4 @@ export default class Timers {
         
 	}
 
-    refreshCreditTimer = async (): Promise<void> => {
-		const credits = await this.creditService.get()
-        const newCredits = await this.timerService.refreshCredits(credits)	
-		io.emit(this.REFRESH_CREDIT_MESSAGE.toString(), JSON.stringify(newCredits));
-	}
 } 

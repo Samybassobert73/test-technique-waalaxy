@@ -2,10 +2,8 @@ import "reflect-metadata"
 import * as db from "./database/database";
 import * as typeFixtures from "./fixtures/type.fixture";
 import * as creditFixtures from "./fixtures/credit.fixture";
-
 import {server} from "./websocket/websocket"
-import { container } from "tsyringe";
-import Timers from "./timers/timers";
+import { initTimers } from "./timers/index.timers";
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -16,8 +14,7 @@ db.connect().then(() => {
 
     creditFixtures.createFixtures()
 
-    const timers = container.resolve(Timers);
-    timers.init()
+    initTimers();
 
     server.listen(port, async () => {
       console.log(`Server is running http://${host}:${port}`);
