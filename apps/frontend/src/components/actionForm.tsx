@@ -1,4 +1,4 @@
-import React , {useEffect}from 'react'
+import React from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -20,26 +20,22 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-import { postAction, getTypes } from '../client/api'
+import { postAction } from '../client/api'
 import { IoIosRocket } from "react-icons/io";
 import { useAction } from '../context/action.context'
-import TypeI from '@/interfaces/type.interface'
+import { useCredit } from "@/context/credit.context";
+import CreditI from '@/interfaces/credit.interface'
+import ActionI from '@/interfaces/action.interface'
 
 const formSchema = z.object({
-    type: z.string().nonempty({
+    credit: z.string().nonempty({
         message: "Action is required",
     }),
 })
    
-const Actionform = () => {
+const ActionForm = () => {
     const {addAction } = useAction()
-    const [types, setTypes] = React.useState<TypeI[]>([])
-
-    useEffect(() => {
-        getTypes().then((data:TypeI[]) => {
-          setTypes(data);
-        });
-    }, []);
+    const {credits} = useCredit()
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -47,8 +43,8 @@ const Actionform = () => {
     })
   
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const { type } = values
-        postAction(type).then((data) => {
+        const { credit } = values
+        postAction(credit).then((data:ActionI) => {
             addAction(data);
         });
     }
@@ -58,7 +54,7 @@ const Actionform = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col md:flex-row justify-start">
                 <FormField
                 control={form.control}
-                name="type"
+                name="credit"
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>Selectionnez une action</FormLabel>   
@@ -71,9 +67,9 @@ const Actionform = () => {
                         <SelectContent>
                             <SelectGroup>
                             <SelectLabel>...</SelectLabel>
-                            {types.map((type:TypeI) => (
-                                <SelectItem key={type._id} value={type._id}>
-                                {type.name}
+                            {credits.map((credit:CreditI, index) => (
+                                <SelectItem key={index} value={credit._id}>
+                                {credit.type}
                                 </SelectItem>
                             ))}
                             </SelectGroup>
@@ -92,4 +88,4 @@ const Actionform = () => {
     )
 }
 
-export default Actionform
+export default ActionForm

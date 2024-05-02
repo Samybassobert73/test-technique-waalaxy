@@ -8,9 +8,9 @@ import ActionSI from "../interfaces/action.interface";
 @injectable()
 export default class ActionModel implements ModelI{
     schema: Schema<any> = new mongoose.Schema({
-        type: {
+        credit: {
             type: Schema.Types.ObjectId,
-            ref: "types"
+            ref: "credits",         
         }
     }, {
         timestamps: true

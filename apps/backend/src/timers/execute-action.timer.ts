@@ -24,8 +24,7 @@ export default class ExecuteActionTimer {
         if (!nextAction){
 			return null
 		}
-
-        const credit = await this.creditService.getOne({type: nextAction.type})
+        const credit = await this.creditService.getById(nextAction.credit)
         const hasCredit = await this.creditService.hasCredit(credit)
 
         if (hasCredit){
@@ -44,7 +43,7 @@ export default class ExecuteActionTimer {
             const removedAction = await this.actionService.delete(action._id) 
 			io.emit(this.REMOVE_ACTION_MESSAGE.toString(), JSON.stringify(removedAction) );
 
-			const credit = await this.creditService.getOne({type: removedAction.type})
+			const credit = await this.creditService.getById(removedAction.credit)
 			const updatedcredit = await this.creditService.decrementCredit(credit)	
 			io.emit(this.DECREMENT_CREDIT_MESSAGE.toString(), JSON.stringify(updatedcredit) );
 		}
