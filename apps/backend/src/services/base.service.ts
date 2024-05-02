@@ -32,4 +32,8 @@ export default class BaseService{
         return await this.repository.findByIdAndDelete(id)
     }
 
+    postMany = async (data: any[]): Promise<any[]> => {
+        return await this.repository.insertMany(data)
+    }
+
 }

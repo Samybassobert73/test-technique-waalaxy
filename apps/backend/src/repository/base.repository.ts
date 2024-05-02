@@ -29,4 +29,8 @@ export default class BaseRepository<T>{
         return await this.model.findByIdAndDelete({_id: new mongoose.Types.ObjectId(id)})
     }
 
+    insertMany = async (data: T[]): Promise<T[]> => {
+        return await this.model.insertMany(data)
+    }
+
 }
