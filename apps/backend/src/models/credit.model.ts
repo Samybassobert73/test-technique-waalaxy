@@ -5,7 +5,6 @@ import ModelI from "../interfaces/model.interface";
 import CreditSI from "../interfaces/credit.interface";
 
 @singleton()
-@injectable()
 export default class CreditModel implements ModelI{
     schema: Schema<any> = new mongoose.Schema({
         type: {

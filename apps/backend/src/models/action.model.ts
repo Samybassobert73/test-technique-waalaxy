@@ -5,7 +5,6 @@ import ModelI from "../interfaces/model.interface";
 import ActionSI from "../interfaces/action.interface";
 
 @singleton()
-@injectable()
 export default class ActionModel implements ModelI{
     schema: Schema<any> = new mongoose.Schema({
         credit: {

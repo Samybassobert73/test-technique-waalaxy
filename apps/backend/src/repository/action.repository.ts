@@ -2,20 +2,21 @@ import ActionSI from "../interfaces/action.interface";
 import ActionModel from '../models/action.model'
 import { inject, injectable } from "tsyringe";
 import BaseRepository from "./base.repository";
+import ActionDTO from "../dto/action.dto";
 
 @injectable()
-export default class ActionRepository extends BaseRepository<ActionSI>{
+export default class ActionRepository extends BaseRepository<ActionSI, ActionDTO>{
 
     constructor(@inject(ActionModel)modelI: ActionModel){
         super(modelI)
     }
 
-    find = async () => {
-        return await this.model.find().populate('credit', 'type')
+    find = async (): Promise<ActionSI[]> => {
+        return await this.model.find().populate('credit', 'type') as ActionSI[]
     }
 
-    create = async (data: ActionSI) => {
-        const resource = await this.model.create(data)
+    create = async (data:ActionDTO): Promise<ActionSI> => {
+        const resource = await this.model.create(data) as ActionSI
         return resource.populate('credit', 'type')
     } 
 

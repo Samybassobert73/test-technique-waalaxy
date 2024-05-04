@@ -1,7 +1,7 @@
 import mongoose from "../database/database";
 
 export interface CreditI{
-    type: mongoose.Schema.Types.ObjectId; 
+    type: string; 
     value: number
 }
 
