@@ -25,13 +25,6 @@ export default class CreditService extends BaseService{
         return credit
     }
 
-    hasCredit = async (credit:CreditSI): Promise<boolean> => {
-        if (credit.value > 0){
-            return true
-        }
-        return false
-    }
-
     refreshCredit = async (credit:CreditSI, value:number): Promise<CreditSI> => {
         credit.value = value
         await credit.save();

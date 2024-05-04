@@ -6,9 +6,9 @@ import ExecuteActionTimer from './execute-action.timer';
 const refreshCreditTimers = container.resolve(RefreshCreditTimers);
 
 //ExecuteActionTimer
-const executeActionTimer = container.resolve(ExecuteActionTimer);
+const executeActionTimers = container.resolve(ExecuteActionTimer);
 
 export const initTimers = () => {
-    refreshCreditTimers.init();
-    executeActionTimer.init();
+    refreshCreditTimers.init(10 * 60 * 1000);
+    executeActionTimers.init(15 * 1000);
 }
