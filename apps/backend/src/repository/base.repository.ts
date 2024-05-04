@@ -1,15 +1,15 @@
 import mongoose from "../database/database";
 import ModelI from "../interfaces/model.interface";
 
-export default class BaseRepository<T>{
+export default class BaseRepository<T, U>{
 
     model: mongoose.Model<any, any>
     constructor(modelI: ModelI){
         this.model = modelI.model
     }
 
-    create = async (data: T) => {
-        return await this.model.create(data) 
+    create = async (data: U) => {
+        return await this.model.create(data) as T 
     }    
 
     find = async (filters = {}): Promise<T[]> =>{
@@ -17,7 +17,7 @@ export default class BaseRepository<T>{
     }
 
     findOne = async (filters = {}): Promise<T> => {
-        return await this.model.findOne(filters) as T
+        return await this.model.findOne(filters).lean() as T
         
     }
 
@@ -26,11 +26,11 @@ export default class BaseRepository<T>{
     }
 
     findByIdAndDelete = async (id: string): Promise<T> => {
-        return await this.model.findByIdAndDelete({_id: new mongoose.Types.ObjectId(id)})
+        return await this.model.findByIdAndDelete({_id: new mongoose.Types.ObjectId(id)}) as T 
     }
 
     insertMany = async (data: T[]): Promise<T[]> => {
-        return await this.model.insertMany(data)
+        return await this.model.insertMany(data) as T[]
     }
 
 }

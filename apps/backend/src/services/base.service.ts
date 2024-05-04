@@ -4,12 +4,12 @@ import BaseRepository from "../repository/base.repository";
 
 export default class BaseService{
 
-    repository: BaseRepository<any>
-    constructor(repository: BaseRepository<any>){
+    repository: BaseRepository<any,any>
+    constructor(repository: BaseRepository<any,any>){
         this.repository = repository
     }
 
-    post = async (data) => {
+    post = async (data:any) => {
         return await this.repository.create(data)
          
     }
@@ -34,6 +34,10 @@ export default class BaseService{
 
     postMany = async (data: any[]): Promise<any[]> => {
         return await this.repository.insertMany(data)
+    }
+
+    aggregate = async (filter: any[]): Promise<any> => {
+        return await this.repository.model.aggregate(filter).exec()
     }
 
 }
