@@ -1,6 +1,6 @@
 import mongoose from "../database/database";
 
-export default interface ModelI{
-    schema: mongoose.Schema<any>
-    model: mongoose.Model<any, {}>
+export default interface ModelI<T>{
+    schema: mongoose.Schema<T>
+    model: mongoose.Model<T, {}>
 }

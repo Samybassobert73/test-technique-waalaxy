@@ -1,43 +1,36 @@
-import mongoose from "../database/database";
+import { PipelineStage } from "mongoose";
 import BaseRepository from "../repository/base.repository";
 
 
-export default class BaseService{
+export default class BaseService<T,U>{
 
-    repository: BaseRepository<any,any>
-    constructor(repository: BaseRepository<any,any>){
+    repository: BaseRepository<T,U>
+    constructor(repository: BaseRepository<T,U>){
         this.repository = repository
     }
 
-    post = async (data:any) => {
-        return await this.repository.create(data)
-         
+    post = async (data:U) => {
+        return await this.repository.create(data)   
     }
 
-    get = async (filters = {}): Promise<any[]> =>{
+    get = async (filters = {}): Promise<T[]> =>{
         return await this.repository.find(filters) as []
     }
 
-    getOne = async (filters = {}): Promise<any> =>{
-        return await this.repository.findOne(filters)
-        
+    getOne = async (filters = {}): Promise<T | null> =>{
+        return await this.repository.findOne(filters) 
     }
 
-    getById = async (id: string): Promise<any> => {
+    getById = async (id: string): Promise<T | null> => {
         return await this.repository.findById(id) 
-         
     }
 
-    delete = async (id: string): Promise<any> => {
+    delete = async (id: string): Promise<T | null> => {
         return await this.repository.findByIdAndDelete(id)
     }
 
-    postMany = async (data: any[]): Promise<any[]> => {
-        return await this.repository.insertMany(data)
-    }
-
-    aggregate = async (filter: any[]): Promise<any> => {
-        return await this.repository.model.aggregate(filter).exec()
+    aggregate = async (filter: PipelineStage[]): Promise<T[]> => {
+        return await this.repository.aggregate(filter)  
     }
 
 }

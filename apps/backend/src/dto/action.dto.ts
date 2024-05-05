@@ -6,4 +6,8 @@ export default class ActionDTO {
     @IsNotEmpty()
     @Transform(value => value.toString())
     credit: string;
+
+    constructor(credit:string){
+        this.credit = credit;
+    }
 }

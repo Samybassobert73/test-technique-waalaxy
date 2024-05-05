@@ -8,10 +8,13 @@ export default class RefreshCreditTimers extends BaseTimer {
 
 	REFRESH_CREDIT_MESSAGE:string = 'refresh-credit';
 
+	creditService:CreditService;
+	
 	constructor(
-		@inject(CreditService)private creditService:CreditService,
+		@inject(CreditService)creditService:CreditService,
 	){
 		super();
+		this.creditService = creditService;
 	}
 
     execute = async (): Promise<void> => {

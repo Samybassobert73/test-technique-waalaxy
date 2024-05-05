@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import indexRouter from "../routes/index.route";
 
 const app = express();
@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 app.use("/apiv1", indexRouter)
 
 // this is for 404
-app.use(function (req, res, next) {
+app.use(function (req:Request, res:Response, next:NextFunction) {
   res.status(404).send(" route not found");
 });
 

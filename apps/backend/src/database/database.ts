@@ -2,11 +2,11 @@ import * as mongoose from "mongoose";
   
 export const connect = async (): Promise<void> => {
   return mongoose
-  .connect(process.env.DB_URL)
+  .connect(process.env.DB_URL ?? '')
   .then(async () => {
     console.log("Connected to MongoDB");
   })
-  .catch((error) => {
+  .catch((error: mongoose.Error) => {
     console.error("Failed to connect to MongoDB", error);
     process.exit();
   });
