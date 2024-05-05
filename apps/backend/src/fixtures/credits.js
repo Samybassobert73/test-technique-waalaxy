@@ -1,6 +1,6 @@
 const MAX_VALUE = 10
 
-const generateCreditValue = ():number => {
+const generateCreditValue = () => {
   const minRange = MAX_VALUE * 0.8;
   const maxRange = MAX_VALUE;
   let randomNumber = Math.random() * (maxRange - minRange) + minRange;

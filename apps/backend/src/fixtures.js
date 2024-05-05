@@ -1,4 +1,4 @@
-import { Error } from "mongoose";
+
 
 const Fixtures = require('node-mongodb-fixtures');
 require('dotenv').config();
@@ -10,5 +10,5 @@ fixtures
   .connect(process.env.DB_URL)
   .then(() => fixtures.unload())
   .then(() => fixtures.load())
-  .catch((e:Error) => console.error(e))
+  .catch((e) => console.error(e))
   .finally(() => fixtures.disconnect());

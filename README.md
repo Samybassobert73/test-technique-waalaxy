@@ -16,6 +16,9 @@ Welcome to the intergalactic universe of our technical test, where stars twinkle
 - [Mongodb](https://www.mongodb.com/fr-fr)
     
 
+## 🔎 Screen Shot
+
+![Screen shot](./waalaxyTestScreen.png)
 ## 🐳 Deploy Containers    
 
 ```bash
@@ -33,11 +36,11 @@ cd apps/frontend
 npm i
 ```
 
-## 📚  Setup Fixtures    
+## 📚  Load Fixtures    
 
 ```bash
-cd  /test-boilerplate/apps/backend
-node ./src/fixtures.ts 
+cd  apps/backend
+node ./src/fixtures.js
 ```
 
 ## ⚙️  Start backend    
@@ -65,7 +68,7 @@ npx nx serve frontend
 - Change MAX_VALUE in Credit Service 
 
 ```bash
-cd test-boilerplate/apps/backend/src/services/credit.service.ts
+cd apps/backend/src/services/credit.service.ts
 ```
 
 ```ts
@@ -81,18 +84,18 @@ export default class CreditService extends BaseService{
 and change MAX_VALUE in credit fixtures
 
 ```bash
-cd test-boilerplate/apps/backend/src/fixtures/credit.ts
+cd apps/backend/src/fixtures/credit.ts
 ```
 
 ```ts
-const MAX_VALUE = 10
+const MAX_VALUE = 10//change here !!!
 
 ```
-then reload fixtures
+WARNING : wait until all actions have been executed or delete them from the database and then reload the fixtures 
 
 ```bash
-cd  /test-boilerplate/apps/backend
-node ./src/fixtures.ts 
+cd  apps/backend
+node ./src/fixtures.js 
 ```
 
 ### Add more credit types
@@ -100,8 +103,9 @@ node ./src/fixtures.ts
 modify credits fixtures
 
 ```bash
-cd test-boilerplate/apps/backend/src/fixtures/credit.ts
+cd apps/backend/src/fixtures/
 ```
+file: credits.js
 
 ```ts
 module.exports = [
@@ -135,10 +139,10 @@ module.exports = [
 
 ```
 
-then reload fixtures
+WARNING : wait until all actions have been executed or delete them from the database and then reload the fixtures
 
 ```bash
-cd  /test-boilerplate/apps/backend
+cd  apps/backend
 node ./src/fixtures.ts 
 ```
 
@@ -146,41 +150,16 @@ node ./src/fixtures.ts
 
 
 ```bash
-cd test-boilerplate/apps/backend/src/timers/
+cd apps/backend/src/timers/
 ```
 
-file: execute-action.timer.ts
+file: index.timer.ts
 
 ```ts
-export default class ExecuteActionTimer {
-
-	DECREMENT_CREDIT_MESSAGE:string = 'decrement-credit';
-	REMOVE_ACTION_MESSAGE:string = 'remove-action';
-
-	constructor(
-		@inject(CreditService)private creditService:CreditService,
-        @inject(ActionService)private actionService:ActionService,	
-	){}
-
-	init = () => {
-		setInterval(() => { this.execute()}, 15 * 1000);//15s change here !!!
-	}
-```
-
-file: refresh-credit.timer.ts
-
-```ts
-export default class RefreshCreditTimers {
-
-	REFRESH_CREDIT_MESSAGE:string = 'refresh-credit';
-
-	constructor(
-		@inject(CreditService)private creditService:CreditService,
-	){}
-
-	init = () => {
-		setInterval(() => { this.execute()},10 * 60 * 1000); //10min change here !!!
-	}
+export const initTimers = (): void => {
+    refreshCreditTimers.init(10 * 60 * 1000); //10m change here !!!
+    executeActionTimers.init(15 * 1000); //15s change here !!!
+}
 ```
 
 ## ✏️ System design
@@ -207,6 +186,9 @@ Using kubernetes allows you to orchestrate the deployment, scaling and updating 
 
 - Redis:
 Using Redis improves application performance, scalability and reliability. Whether for data caching, user session management, queuing or temporary data storage.
+
+- Serverless for CRON Job - Timers:
+Using Serverless allows you to automate recurring functions in clouds at specific intervals and pay only for their use, saving you money.
 
 
 ## 🙇 Author
