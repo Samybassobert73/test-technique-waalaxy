@@ -26,7 +26,7 @@ describe('TIMER - EXECUTE ACTION', () => {
     });
 
     it('EXECUTE TIMER --> call execute function after 15seconds', () => {
-        const milliseconds = 10 * 60 * 1000;
+        const milliseconds = 15 * 1000;
         const delaySpy = jest.spyOn(executeActionTimer, 'execute');
         executeActionTimer.init(milliseconds);
         jest.advanceTimersByTime(milliseconds);
