@@ -38,7 +38,7 @@ const QueueList = () => {
             <ul className="flex flex-col md:flex-row justify-start flex-wrap">
               { actions && actions.length > 0 ? (
                  <AnimatePresence>
-                 { [...actions].reverse().map((action,index) => (
+                 { [...actions].reverse().map((action:ActionI,index:number) => (
                       <QueueItem action={action} index={index} key={index}/>
                   ))}
                 </AnimatePresence>  

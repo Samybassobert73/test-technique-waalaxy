@@ -40,7 +40,7 @@ const BadgeList = () => {
           <h2 className="text-sm font-medium">Vos crédits :</h2>
           {credits !== null ? (
             <ul className="flex justify-center items-center gap-2">
-              {credits && credits.map((credit, index) => (
+              {credits && credits.map((credit:CreditI, index:number) => (
                   <BadgeItem credit={credit} key={index} index={index}/>
               ))}
             </ul>

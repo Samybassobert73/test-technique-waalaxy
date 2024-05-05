@@ -3,15 +3,15 @@ import ActionI from '../interfaces/action.interface';
 
 export type ActionContextType = {
     actions: ActionI[];
-    setActions: (actions:ActionI[]) => void;
+    setActions: React.Dispatch<React.SetStateAction<ActionI[]>>
     addAction: (newAction:ActionI) => void;
     removeAction: (id:string) => void;
 };
 
   
-export const ActionContext = createContext<ActionContextType|undefined>(undefined);
+export const ActionContext = createContext<ActionContextType>({} as ActionContextType);
 
-export const useAction = () => useContext(ActionContext);
+export const useAction = () => useContext<ActionContextType>(ActionContext);
 
 
 export const ActionProvider = ({ children }: { children: React.ReactNode }) => {

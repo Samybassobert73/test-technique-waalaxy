@@ -3,14 +3,14 @@ import CreditI from '@/interfaces/credit.interface';
 
 export type CreditContextType = {
     credits: CreditI[];
-    setCredits: (actions:CreditI[]) => void;
+    setCredits: React.Dispatch<React.SetStateAction<CreditI[]>>;
     updateCredit: (id: string, newValue:number) => void
 };
 
   
-export const CreditContext = createContext<CreditContextType|undefined>(undefined);
+export const CreditContext = createContext<CreditContextType>({} as CreditContextType);
 
-export const useCredit = () => useContext(CreditContext);
+export const useCredit = () => useContext<CreditContextType>(CreditContext);
 
 
 export const CreditProvider = ({ children }: { children: React.ReactNode }) => {
