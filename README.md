@@ -91,7 +91,7 @@ cd apps/backend/src/fixtures/credit.js
 const MAX_VALUE = 10//change here !!!
 
 ```
-WARNING : wait until all actions have been executed or delete them from the database and then reload the fixtures 
+⚠️WARNING : wait until all actions have been executed or delete them from the database and then reload the fixtures 
 
 ```bash
 cd  apps/backend
@@ -139,7 +139,7 @@ module.exports = [
 
 ```
 
-WARNING : wait until all actions have been executed or delete them from the database and then reload the fixtures
+⚠️WARNING : wait until all actions have been executed or delete them from the database and then reload the fixtures
 
 ```bash
 cd  apps/backend
