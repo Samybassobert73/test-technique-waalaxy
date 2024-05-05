@@ -18,6 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        waalaxyDarkBlue: '#315ae7',
+        waalaxyBlue:'#eef1fc',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

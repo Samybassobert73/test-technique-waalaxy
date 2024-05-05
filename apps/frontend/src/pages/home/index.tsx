@@ -5,7 +5,7 @@ import { CreditProvider } from '@/context/credit.context'
 const Index = () => {
     
   return (
-    <div className="flex items-center justify-center h-screen bg-[#eef1fc]">
+    <div className="flex items-center justify-center h-screen bg-waalaxyBlue">
       <CreditProvider>
         <ActionProvider>
           <QueueManager/>

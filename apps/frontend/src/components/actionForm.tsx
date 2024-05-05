@@ -60,14 +60,14 @@ const ActionForm = () => {
                         <FormLabel>Selectionnez une action</FormLabel>   
                         <Select onValueChange={field.onChange}>
                         <FormControl {...field} >
-                            <SelectTrigger className="w-[180px] focus:ring-1 focus:ring-[#315ae7]"  >
+                            <SelectTrigger className="w-[180px] focus:ring-1 focus:ring-waalaxyDarkBlue"  >
                                 <SelectValue placeholder="Selectionner une Action" />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                             <SelectGroup>
                             <SelectLabel>...</SelectLabel>
-                            {credits.map((credit:CreditI, index) => (
+                            {credits.map((credit:CreditI, index:number) => (
                                 <SelectItem key={index} value={credit._id}>
                                 {credit.type}
                                 </SelectItem>
