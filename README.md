@@ -143,7 +143,7 @@ WARNING : wait until all actions have been executed or delete them from the data
 
 ```bash
 cd  apps/backend
-node ./src/fixtures.ts 
+node ./src/fixtures.js
 ```
 
 ### Change timers delay
