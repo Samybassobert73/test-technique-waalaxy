@@ -84,7 +84,7 @@ export default class CreditService extends BaseService{
 and change MAX_VALUE in credit fixtures
 
 ```bash
-cd apps/backend/src/fixtures/credit.ts
+cd apps/backend/src/fixtures/credit.js
 ```
 
 ```ts
