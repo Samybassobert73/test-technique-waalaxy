@@ -111,6 +111,7 @@ file: credits.js
 module.exports = [
   {
     name: 'A',
+    value: generateCreditValue(),
     createdAt: new Date() ,
     updatedAt: new Date(),
     __v: 0
@@ -118,12 +119,14 @@ module.exports = [
   {
 
     name: 'B',
+    value: generateCreditValue(),
     createdAt: new Date() ,
     updatedAt: new Date(),
     __v: 0
   },
   {
     name: "C",
+    value: generateCreditValue(),
     createdAt: new Date() ,
     updatedAt: new Date(),
     __v: 0
@@ -131,6 +134,7 @@ module.exports = [
   //add new credits here !!!
   {
     name: "D",
+    value: generateCreditValue(),
     createdAt: new Date() ,
     updatedAt: new Date(),
     __v: 0
